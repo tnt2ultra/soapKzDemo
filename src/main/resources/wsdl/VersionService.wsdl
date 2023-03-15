@@ -1,0 +1,980 @@
+<?xml version='1.0' encoding='UTF-8'?><?xml-stylesheet type='text/xsl' href='wsdl-viewer.xsl'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="esf" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="VersionService" targetNamespace="esf">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="esf" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="esf">
+  <xs:complexType name="versionResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="version" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Запрашиваемая информация о версии приложения, либо версии API, либо актуальной вервии бланка</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="versionRequest">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="errorCodesRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="language" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Язык на котором будет представлено описание кодов ошибок (KZ, RU)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="errorCodesResponse">
+    <xs:sequence>
+      <xs:element name="errorDescriptions">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="errorDescription" type="tns:errorDescription">
+              <xs:annotation>
+                <xs:documentation>Список кодов ошибок и их описания</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="errorDescription">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="errorCode" type="tns:errorCode">
+        <xs:annotation>
+          <xs:documentation>Код ошибки</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="description" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Описание ошибки</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="errorCode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NO_AUTH"/>
+      <xs:enumeration value="CONTENT_HAS_INVALID_CHARACTERS"/>
+      <xs:enumeration value="CERTIFICATE_EXPIRED"/>
+      <xs:enumeration value="CERTIFICATE_NOT_YET_VALID"/>
+      <xs:enumeration value="CERTIFICATE_NOT_VALID"/>
+      <xs:enumeration value="CERTIFICATE_REVOKED"/>
+      <xs:enumeration value="CERTIFICATE_SIGNATURE_NOT_VALID"/>
+      <xs:enumeration value="CERTIFICATE_POLICY_NOT_VALID"/>
+      <xs:enumeration value="CERTIFICATE_IS_NOT_FOR_PRIVATE"/>
+      <xs:enumeration value="CERTIFICATE_IS_NOT_FOR_ENTERPRISE"/>
+      <xs:enumeration value="CERTIFICATE_IS_NOT_FOR_AUTH"/>
+      <xs:enumeration value="CERTIFICATE_IS_NOT_FOR_SIGNING"/>
+      <xs:enumeration value="PASSWORD_EXPIRED"/>
+      <xs:enumeration value="PASSWORD_WRONG"/>
+      <xs:enumeration value="PASSWORD_FORMAT_INVALID"/>
+      <xs:enumeration value="USER_HAS_NOT_REGISTERED"/>
+      <xs:enumeration value="BUSINESS_PROFILE_TYPE_REQUIRED"/>
+      <xs:enumeration value="CERTIFICATE_SERIES_OR_CERTIFICATE_NUM_ABSENT"/>
+      <xs:enumeration value="HEAD_OFFICE_CANNOT_BE_BRANCH_NON_RESIDENT"/>
+      <xs:enumeration value="BRANCH_NON_RESIDENT_STATE_ERROR"/>
+      <xs:enumeration value="ORIGINAL_DOCUMENT_SIGNATURE_VERIFICATION_FAILED"/>
+      <xs:enumeration value="SIGNATURE_VERIFICATION_FAILED"/>
+      <xs:enumeration value="SIGNATURE_INVALID_FORMAT"/>
+      <xs:enumeration value="CERTIFICATE_INVALID_FORMAT"/>
+      <xs:enumeration value="FALSE_COMPANY_VALITATION_FAILED"/>
+      <xs:enumeration value="FLK_VALITATION_FAILED"/>
+      <xs:enumeration value="FIELD_IS_NULL"/>
+      <xs:enumeration value="FIELD_INVALID"/>
+      <xs:enumeration value="INVALID_INVOICE_VERSION"/>
+      <xs:enumeration value="USER_NOT_FOUND"/>
+      <xs:enumeration value="IIN_NOT_VALID"/>
+      <xs:enumeration value="OCSP_NOT_AVAILABLE"/>
+      <xs:enumeration value="USER_BLOCKED"/>
+      <xs:enumeration value="ENTERPRISE_NOT_FOUND_FOR_USER"/>
+      <xs:enumeration value="PERMISSIONS_EXPIRED"/>
+      <xs:enumeration value="NO_REQUIRED_PERMISSIONS"/>
+      <xs:enumeration value="NO_REQUIRED_TAXPAYER_STATE"/>
+      <xs:enumeration value="PROXY_NOT_YET"/>
+      <xs:enumeration value="SELLER_TIN_ABSENT_IN_DICTIONARY"/>
+      <xs:enumeration value="SELLER_IS_FAKE"/>
+      <xs:enumeration value="CUSTOMER_TIN_ABSENT_IN_DICTIONARY"/>
+      <xs:enumeration value="CUSTOMER_IS_FAKE"/>
+      <xs:enumeration value="SELLER_TIN_NOT_EQUALS_WITH_TIN_IN_SESSION"/>
+      <xs:enumeration value="SELLER_PARTICIPANT_TYPE_NOT_EQUALS_WITH_PARTICIPANT_TYPE_IN_SESSION"/>
+      <xs:enumeration value="CONSIGNOR_TIN_ABSENT_IN_DICTIONARY"/>
+      <xs:enumeration value="CONSIGNOR_IS_FAKE"/>
+      <xs:enumeration value="CONSIGNEE_TIN_ABSENT_IN_DICTIONARY"/>
+      <xs:enumeration value="CONSIGNEE_IS_FAKE"/>
+      <xs:enumeration value="CUSTOMER_NOT_PUBLIC_OFFICE"/>
+      <xs:enumeration value="BIK_IIK_TIN_NOT_CORRECT"/>
+      <xs:enumeration value="INDIVIDUAL_SELLER_CANT_BE_JO_PARTICIPANT"/>
+      <xs:enumeration value="INDIVIDUAL_CUSTOMER_CANT_BE_JO_PARTICIPANT"/>
+      <xs:enumeration value="REORGANIZED_SELLER_TIN_ABSENT_IN_DICTIONARY"/>
+      <xs:enumeration value="REORGANIZED_CUSTOMER_TIN_ABSENT_IN_DICTIONARY"/>
+      <xs:enumeration value="REORGANIZED_SELLER_IS_FAKE"/>
+      <xs:enumeration value="REORGANIZED_CUSTOMER_IS_FAKE"/>
+      <xs:enumeration value="AGENT_SELLER_TIN_ABSENT_IN_DICTIONARY"/>
+      <xs:enumeration value="AGENT_CUSTOMER_TIN_ABSENT_IN_DICTIONARY"/>
+      <xs:enumeration value="AGENT_SELLER_IS_FAKE"/>
+      <xs:enumeration value="AGENT_CUSTOMER_IS_FAKE"/>
+      <xs:enumeration value="DEMO_TINS"/>
+      <xs:enumeration value="RELATED_INVOICE_NOT_FOUND_TIN_FIELD_DIFFERS"/>
+      <xs:enumeration value="RELATED_INVOICE_NOT_FOUND_NUM_FIELD_DIFFERS"/>
+      <xs:enumeration value="RELATED_INVOICE_NOT_FOUND_DATE_FIELD_DIFFERS"/>
+      <xs:enumeration value="RELATED_INVOICE_NOT_FOUND_PROJECT_CODE_FIELD_DIFFERS"/>
+      <xs:enumeration value="RELATED_INVOICE_NOT_FOUND_REGISTRATION_NUMBER_FIELD_DIFFERS"/>
+      <xs:enumeration value="RELATED_INVOICE_NOT_FOUND"/>
+      <xs:enumeration value="INVOICE_SENDER_NOT_VALID"/>
+      <xs:enumeration value="MAIN_INVOICE_NOT_FOUND"/>
+      <xs:enumeration value="INVOICE_NOT_FOUND"/>
+      <xs:enumeration value="INVOICE_AND_RELATED_SNT_NOT_EQUALS"/>
+      <xs:enumeration value="MAIN_AND_ADDITIONAL_INVOICES_NOT_EQUALS"/>
+      <xs:enumeration value="MAIN_AND_ADDITIONAL_INVOICES_PRODUCTS_NOT_EQUALS"/>
+      <xs:enumeration value="MAIN_AND_ADDITIONAL_INVOICES_SELLERS_NOT_EQUALS"/>
+      <xs:enumeration value="ADDITIONAL_INVOICE_SERVICE_COUNT_GREATER_MAIN"/>
+      <xs:enumeration value="MAIN_AND_FIXED_INVOICES_SELLERS_NOT_EQUALS"/>
+      <xs:enumeration value="MAIN_AND_FIXED_INVOICES_CUSTOMERS_NOT_EQUALS"/>
+      <xs:enumeration value="MAIN_AND_FIXED_INVOICES_NDS_RATE_TYPES_NOT_EQUALS"/>
+      <xs:enumeration value="MAIN_AND_FIXED_INVOICES_CUSTOMERS_WRONG_STATUS"/>
+      <xs:enumeration value="MAIN_AND_ADDITIONAL_INVOICES_TURNOVER_DATE_NOT_CORRESPONDED"/>
+      <xs:enumeration value="MAIN_AND_ADDITIONAL_INVOICES_SUM_NEGATIVE"/>
+      <xs:enumeration value="MAIN_AND_FIXED_INVOICES_DATE_RANGE_INVALID"/>
+      <xs:enumeration value="MAIN_AND_FIXED_INVOICES_NONRESIDENT_WRONG_STATUS"/>
+      <xs:enumeration value="MAIN_AND_FIXED_INVOICES_RETAIL_WRONG_STATUS"/>
+      <xs:enumeration value="ADDITIONAL_INVOICE_PRODUCT_UNIT_PRICE_IS_ABSENT"/>
+      <xs:enumeration value="MAIN_AND_ADDITIONAL_INVOICES_UNIT_CODE_DIFFERENT"/>
+      <xs:enumeration value="MAIN_AND_ADDITIONAL_INVOICES_UNIT_CODE_MUST_MATCH_FIRST_FOUR_DIGITS"/>
+      <xs:enumeration value="ADDITIONAL_INVOICE_LESSOR_PRODUCT_NOT_FOUND"/>
+      <xs:enumeration value="UNIT_CODE_IN_MAIN_INVOICE_NOT_EXISTS_IN_DICTIONARY"/>
+      <xs:enumeration value="UNIT_CODE_IN_ADDITIONAL_INVOICE_NOT_EXISTS_IN_DICTIONARY"/>
+      <xs:enumeration value="MAIN_AND_ADDITIONAL_INVOICES_QUANTITY_SUM_NEGATIVE"/>
+      <xs:enumeration value="MAIN_AND_ADDITIONAL_INVOICES_UNIT_PRICE_SUM_NEGATIVE"/>
+      <xs:enumeration value="MAIN_AND_ADDITIONAL_INVOICES_PRICE_WITHOUT_TAX_SUM_NEGATIVE"/>
+      <xs:enumeration value="MAIN_AND_ADDITIONAL_INVOICES_EXCISE_AMOUNT_SUM_NEGATIVE"/>
+      <xs:enumeration value="MAIN_AND_ADDITIONAL_INVOICES_TURNOVER_SIZE_SUM_NEGATIVE"/>
+      <xs:enumeration value="MAIN_AND_ADDITIONAL_INVOICES_NDS_AMOUNT_SUM_NEGATIVE"/>
+      <xs:enumeration value="MAIN_AND_ADDITIONAL_INVOICES_PRICE_WITH_TAX_SUM_NEGATIVE"/>
+      <xs:enumeration value="MAIN_FOR_ADDITIONAL_INVOICES_NOT_FOUND"/>
+      <xs:enumeration value="NOT_UNIQUE_DB_ERROR_MSG"/>
+      <xs:enumeration value="NOT_UNIQUE_MEMORY_ERROR_MSG"/>
+      <xs:enumeration value="FIXED_ORDINARY_ERROR_MSG"/>
+      <xs:enumeration value="FIXED_NOT_ALLOWED_FOR_REORGANIZATION"/>
+      <xs:enumeration value="ADDITIONAL_PARENT_ERROR_MSG"/>
+      <xs:enumeration value="FIXED_PARENT_ERROR_MSG"/>
+      <xs:enumeration value="FIXED_RELATED_DB_ERROR_MSG"/>
+      <xs:enumeration value="FIXED_RELATED_MEMORY_ERROR_MSG"/>
+      <xs:enumeration value="FIXED_ALREADY_EXISTS_ERROR_MSG"/>
+      <xs:enumeration value="FIXED_CREATED"/>
+      <xs:enumeration value="CANCEL_PARENT_INVOICE"/>
+      <xs:enumeration value="CANCEL_OGD"/>
+      <xs:enumeration value="CANCEL_OGD_ADMIN"/>
+      <xs:enumeration value="RESTORED_OGD"/>
+      <xs:enumeration value="RESTORED_OGD_ADMIN"/>
+      <xs:enumeration value="ARM_USER_NEED_EMAIL_FOR_PASSWORD_CHANGE"/>
+      <xs:enumeration value="USER_IS_NOT_SUPER_ADMIN"/>
+      <xs:enumeration value="REQUIRED_VALUE_NOT_FOUND"/>
+      <xs:enumeration value="INVOICE_MISSING"/>
+      <xs:enumeration value="WRONG_TIN"/>
+      <xs:enumeration value="WRONG_TYPE"/>
+      <xs:enumeration value="WRONG_STATUS"/>
+      <xs:enumeration value="WRONG_DATE"/>
+      <xs:enumeration value="WRONG_SUM"/>
+      <xs:enumeration value="WRONG_PARENT_STATUS"/>
+      <xs:enumeration value="WRONG_FIXED_PARENT_STATUS"/>
+      <xs:enumeration value="LOCKED_BY_SENDING_TO_ISGO"/>
+      <xs:enumeration value="PARENT_LOCKED_BY_SENDING_TO_ISGO"/>
+      <xs:enumeration value="CAN_CREATE_ONLY_ADDITIONAL_INVOICE_FROM_REORGANIZED"/>
+      <xs:enumeration value="ADDITIONAL_INVOICE_FROM_REORGANIZED_MAY_BE_ONLY_FOR_RETURN"/>
+      <xs:enumeration value="ADDITIONAL_INVOICE_FROM_REORGANIZED_PERIOD_EXPIRED"/>
+      <xs:enumeration value="ADDITIONAL_INVOICE_FROM_REORGANIZED_SUM_CHANGED_FOR_6"/>
+      <xs:enumeration value="ADDITIONAL_INVOICE_FROM_REORGANIZED_QUANTITY_DIFFERS"/>
+      <xs:enumeration value="ADDITIONAL_INVOICE_FOR_REORGANIZED_DATE_EXPIRED"/>
+      <xs:enumeration value="ADDITIONAL_INVOICE_FOR_REORGANIZED_ONLY_RETURN_ALLOWED"/>
+      <xs:enumeration value="WRONG_NOT_PAYER_NDS"/>
+      <xs:enumeration value="WRONG_VM_FLK"/>
+      <xs:enumeration value="LOCKED_BY_MSH"/>
+      <xs:enumeration value="INVOICE_ALREADY_LINKED_WITH_SNT"/>
+      <xs:enumeration value="INVOICE_CONTAINS_SNT_PRODUCTS"/>
+      <xs:enumeration value="INVALID_CONSIGNEE_COUNTRY_CODE"/>
+      <xs:enumeration value="INVALID_CUSTOMER_COUNTRY_CODE"/>
+      <xs:enumeration value="INVALID_SELLER_COUNTRY_CODE"/>
+      <xs:enumeration value="INVALID_SELLER_REORGANIZATION_TIN"/>
+      <xs:enumeration value="INVALID_CUSTOMER_REORGANIZATION_TIN"/>
+      <xs:enumeration value="INVALID_CURRENCY_CODE"/>
+      <xs:enumeration value="INVALID_DELIVERY_CONDITION_CODE"/>
+      <xs:enumeration value="INVALID_TRANSPORT_TYPE_CODE"/>
+      <xs:enumeration value="INVALID_ORIGIN_CODE"/>
+      <xs:enumeration value="NDS_CERTIFICATE_NUM_IS_EMPTY"/>
+      <xs:enumeration value="NDS_CERTIFICATE_SERIES_IS_EMPTY"/>
+      <xs:enumeration value="MISSING_SHARING_AGREEMENT_PARTICIPANT"/>
+      <xs:enumeration value="MISSING_JOINT_ACTIVITY_PARTICIPANT"/>
+      <xs:enumeration value="MISSING_PRINCIPAL"/>
+      <xs:enumeration value="SELLER_MISSING_SHARING_AGREEMENT_PARTICIPANT"/>
+      <xs:enumeration value="SELLER_MISSING_JOINT_ACTIVITY_PARTICIPANT"/>
+      <xs:enumeration value="SELLER_MISSING_PRINCIPAL"/>
+      <xs:enumeration value="CUSTOMER_MISSING_SHARING_AGREEMENT_PARTICIPANT"/>
+      <xs:enumeration value="CUSTOMER_MISSING_JOINT_ACTIVITY_PARTICIPANT"/>
+      <xs:enumeration value="CUSTOMER_MISSING_PRINCIPAL"/>
+      <xs:enumeration value="NOT_MISSING_SHARING_AGREEMENT_PARTICIPANT"/>
+      <xs:enumeration value="INVALID_CUSTOMER_TIN"/>
+      <xs:enumeration value="PROJECT_CODE_NOT_FOUND"/>
+      <xs:enumeration value="PROJECT_CODE_SELLER_AGENT_NOTACTIVE"/>
+      <xs:enumeration value="PROJECT_CODE_SELLER_AGENT_MISSING"/>
+      <xs:enumeration value="PROJECT_CODE_CUSTOMER_AGENT_NOTACTIVE"/>
+      <xs:enumeration value="PROJECT_CODE_CUSTOMER_AGENT_MISSING"/>
+      <xs:enumeration value="PROJECT_SELLER_AGENT_TIN_FAKE"/>
+      <xs:enumeration value="PROJECT_CUSTOMER_AGENT_TIN_FAKE"/>
+      <xs:enumeration value="PROJECT_SELLER_TIN_FAKE"/>
+      <xs:enumeration value="PROJECT_CUSTOMER_TIN_FAKE"/>
+      <xs:enumeration value="TNVED_CODE_CANT_BE_EMPTY"/>
+      <xs:enumeration value="TNVED_CODE_NOT_FOUND"/>
+      <xs:enumeration value="TNVED_CODE_USES_IN_VSTORE"/>
+      <xs:enumeration value="TNVED_CODE_INCONSISTENT"/>
+      <xs:enumeration value="TNVED_CODE_DIFFERS"/>
+      <xs:enumeration value="TNVED_CODE_FIXED_ID_NOT_EQUALS"/>
+      <xs:enumeration value="ORIGIN_CODE_5_EAEC_INCOMPATIBLE"/>
+      <xs:enumeration value="NDS_RATE_INCORRECT"/>
+      <xs:enumeration value="PRODUCT_DECLARATION_REQUIRED"/>
+      <xs:enumeration value="PRODUCT_NUMBER_IN_DECLARATION_REQUIRED"/>
+      <xs:enumeration value="PUBLIC_OFFICE_FIELDS_NOT_CONSISTENT"/>
+      <xs:enumeration value="CURRENCY_RATE_NOT_MATCH"/>
+      <xs:enumeration value="CURRENCY_RATE_SHOULD_BE_NULL"/>
+      <xs:enumeration value="UNKNOWN_PAPER_REASON"/>
+      <xs:enumeration value="PAPER_REASON_NOT_SET"/>
+      <xs:enumeration value="PAPER_DATE_NOT_SET"/>
+      <xs:enumeration value="PAPER_SNT_PAPER_DATE_EXPIRED"/>
+      <xs:enumeration value="PAPER_SNT_DATE_NOT_BEGIN"/>
+      <xs:enumeration value="PAPER_SNT_MISSING_REQUIREMENT_UNAVAILABLE_FOR_DATE"/>
+      <xs:enumeration value="DOWNTIME_NOT_FOUND_FOR_DATE"/>
+      <xs:enumeration value="WRONG_INVOICE_TYPE_FOR_PAPER_REASON"/>
+      <xs:enumeration value="WRONG_CHILD_INVOICE_WITH_PAPER_REASON"/>
+      <xs:enumeration value="BLOCKING_NOT_FOUND_FOR_DATE"/>
+      <xs:enumeration value="PAPER_INVOICE_TIME_EXPIRED"/>
+      <xs:enumeration value="PAPER_INVOICE_NOT_AVAILABLE_FOR_MOVABLE_PRODUCTS"/>
+      <xs:enumeration value="PAPER_INVOICE_TIME_ERROR_FOR_LESSOR"/>
+      <xs:enumeration value="PAPER_INVOICE_FOR_REORGANIZATION_DISABLED"/>
+      <xs:enumeration value="PAPER_INVOICE_FIXED_FOR_REORGANIZATION_DISABLED"/>
+      <xs:enumeration value="NDS_RATE_FOR_NOT_NDS_PAYER"/>
+      <xs:enumeration value="NDS_AMOUNT_FOR_NOT_NDS_PAYER"/>
+      <xs:enumeration value="CATALOG_TRU_ID_NOT_FOUND"/>
+      <xs:enumeration value="SELLER_NOT_HAVE_REQUIRED_REGISTRATION_TYPE"/>
+      <xs:enumeration value="CUSTOMER_NOT_HAVE_REQUIRED_REGISTRATION_TYPE"/>
+      <xs:enumeration value="SELLER_IS_BLOCKED"/>
+      <xs:enumeration value="CUSTOMER_IS_BLOCKED"/>
+      <xs:enumeration value="CUSTOMER_IS_NOT_ENTREPRENEUR"/>
+      <xs:enumeration value="CUSTOMER_AGENT_IS_BLOCKED"/>
+      <xs:enumeration value="SELLER_AGENT_IS_BLOCKED"/>
+      <xs:enumeration value="CONSIGNOR_IS_BLOCKED"/>
+      <xs:enumeration value="CONSIGNEE_IS_BLOCKED"/>
+      <xs:enumeration value="REVOKE_IS_BLOCKED"/>
+      <xs:enumeration value="SELLER_PROJECT_PARTICIPANTS_ERROR"/>
+      <xs:enumeration value="CUSTOMER_PROJECT_PARTICIPANTS_ERROR"/>
+      <xs:enumeration value="PARTICIPANT_SHARE_INCORRECT"/>
+      <xs:enumeration value="PROJECT_NOT_FOUND_ERROR"/>
+      <xs:enumeration value="SELLER_PROJECT_NOT_FOUND_ERROR"/>
+      <xs:enumeration value="SELLER_PROJECT_MORE_THAN_ONE"/>
+      <xs:enumeration value="CUSTOMER_PROJECT_NOT_FOUND_ERROR"/>
+      <xs:enumeration value="CUSTOMER_PROJECT_MORE_THAN_ONE"/>
+      <xs:enumeration value="SELLER_BRANCH_NOT_BELONGS_TO_HEAD"/>
+      <xs:enumeration value="BRANCH_SELLER_TIN_ABSENT_IN_DICTIONARY"/>
+      <xs:enumeration value="BRANCH_SELLER_IS_FAKE"/>
+      <xs:enumeration value="CUSTOMER_BRANCH_NOT_BELONGS_TO_HEAD"/>
+      <xs:enumeration value="BRANCH_CUSTOMER_TIN_ABSENT_IN_DICTIONARY"/>
+      <xs:enumeration value="BRANCH_CUSTOMER_IS_FAKE"/>
+      <xs:enumeration value="TAXPAYER_IS_NOT_RESPONSIBLE_FOR_BUDGET"/>
+      <xs:enumeration value="STORE_CREATE_USER_TIN_NULL"/>
+      <xs:enumeration value="STORE_EDIT_USER_TIN_NULL"/>
+      <xs:enumeration value="PARENT_TAXPAYER_STORE_NOT_FOUND"/>
+      <xs:enumeration value="PARENT_TAXPAYER_STORE_IS_CHILD"/>
+      <xs:enumeration value="USER_IS_NOT_ALLOWED_TO_EDIT_STORE"/>
+      <xs:enumeration value="USER_IS_NOT_ALLOWED_TO_EDIT_PARENT_STORE"/>
+      <xs:enumeration value="STORE_CREATE_NAME_EXISTS"/>
+      <xs:enumeration value="STORE_CREATE_PARENT_NOT_FOUND"/>
+      <xs:enumeration value="STORE_CREATE_POSTING_STORE_EXISTS"/>
+      <xs:enumeration value="STORE_CREATE_DEFAULT_STORE_EXISTS"/>
+      <xs:enumeration value="STORE_CREATE_DEFAULT_STORE_DOESNT_EXISTS"/>
+      <xs:enumeration value="STORE_CREATE_FIRST_STORE_SHOULD_BE_DEFAULT"/>
+      <xs:enumeration value="STORE_CREATE_OIL_OVD_POINTED_TWICE"/>
+      <xs:enumeration value="STORE_CREATE_TOBACO_OVD_POINTED_TWICE"/>
+      <xs:enumeration value="STORE_CREATE_ALCOHOL_LICENSE_POINTED_TWICE"/>
+      <xs:enumeration value="STORE_CREATE_RAW_MATERIALS_WRONG_TYPE"/>
+      <xs:enumeration value="STORE_CREATE_RAW_MATERIALS_INCOMPATIBLE_ATTR"/>
+      <xs:enumeration value="STORE_ALCOHOL_LICENSE_DELETED"/>
+      <xs:enumeration value="STORE_OIL_OVD_DELETED"/>
+      <xs:enumeration value="STORE_TOBACCO_OVD_DELETED"/>
+      <xs:enumeration value="PRODUCT_DEFICIENCY"/>
+      <xs:enumeration value="PRODUCT_DEFICIENCY_WRITE_OFF"/>
+      <xs:enumeration value="PRODUCT_DEFICIENCY_TO_RETURN_BY_RELATED_INVOICE"/>
+      <xs:enumeration value="PRODUCT_EAEC_EXPORT_FORBIDDEN"/>
+      <xs:enumeration value="PRODUCT_DEFICIENCY_PREARCHIVE"/>
+      <xs:enumeration value="TAXPAYER_TIN_ABSENT_IN_DICTIONARY"/>
+      <xs:enumeration value="TAXPAYER_IS_FAKE"/>
+      <xs:enumeration value="TAXPAYER_STORE_NOT_FOUND"/>
+      <xs:enumeration value="TAXPAYER_STORE_MOVEMENT_PROHIBITED"/>
+      <xs:enumeration value="TAXPAYER_STORE_PROJECT_CODE_INCORRECT"/>
+      <xs:enumeration value="TAXPAYER_STORE_COOPERATIVE_FLAG_INCORRECT"/>
+      <xs:enumeration value="TAXPAYER_STORE_LESSEE_TIN_INCORRECT"/>
+      <xs:enumeration value="TAXPAYER_STORE_COOPERATIVE_STORE_REQUIRED"/>
+      <xs:enumeration value="TAXPAYER_IS_BLOCKED"/>
+      <xs:enumeration value="SENDER_AND_RECIPIENT_STORES_HAS_DIFFERENT_TIN"/>
+      <xs:enumeration value="SENDER_AND_RECIPIENT_DO_NOT_HAVE_RELATION"/>
+      <xs:enumeration value="SEND_FROM_POSTING_GOODS_STORE_FORBIDDEN"/>
+      <xs:enumeration value="SEND_TO_POSTING_GOODS_STORE_FORBIDDEN"/>
+      <xs:enumeration value="ESF_FROM_POSTING_GOODS_STORE_UNAVAILABLE"/>
+      <xs:enumeration value="INVOICE_CAN_BE_ONLY_ONE_INVOICE_RELATED_TO_SNT_IN_BATCH"/>
+      <xs:enumeration value="INVOICE_DELIVERY_DOC_DATE_NOT_EQUALS_WITH_SNT_DATE"/>
+      <xs:enumeration value="INVOICE_RELATED_SNT_HAS_INVALID_STATUS"/>
+      <xs:enumeration value="INVOICE_ALREADY_HAS_RELATED_SNT_IN_ACTIVE_STATUS"/>
+      <xs:enumeration value="INVOICE_FOR_LEASING_MUST_HAVE_ONLY_SERVICES"/>
+      <xs:enumeration value="INVOICE_FOR_SNT_MUST_HAVE_ONLY_GOODS"/>
+      <xs:enumeration value="INVOICE_FOR_LEASING_INVALID_SNT"/>
+      <xs:enumeration value="INVOICE_FOR_LEASING_DIFFERS_TINS_FROM_SNT"/>
+      <xs:enumeration value="INVOICE_SELLER_STATUS_NOT_EQUAL_SNT"/>
+      <xs:enumeration value="ORDINARY_INVOICE_CANNOT_CREATE_FROM_RETURNED_SNT"/>
+      <xs:enumeration value="FIXED_INVOICE_CANNOT_CREATE_FROM_PRIMARY_OR_RETURNED_SNT"/>
+      <xs:enumeration value="FIXED_INVOICE_CANNOT_CREATE_FROM_PRIMARY_SNT_WITH_FIXED_INVOICE"/>
+      <xs:enumeration value="FIXED_INVOICE_CANNOT_CREATE_FROM_PRIMARY_SNT_WITH_RETURNED_INVOICE"/>
+      <xs:enumeration value="ADDITIONAL_INVOICE_CANNOT_CREATE_FROM_PRIMARY_OR_FIXED_SNT"/>
+      <xs:enumeration value="ORDINARY_INVOICE_ON_FIXED_SNT_ERROR"/>
+      <xs:enumeration value="FIXED_INVOICE_ON_FIXED_SNT_ERROR"/>
+      <xs:enumeration value="ADDITIONAL_INVOICE_ON_RETURNED_SNT_ERROR"/>
+      <xs:enumeration value="SNT_BASED_INVOICE_HEAD_TO_BRANCH_NOT_ALLOWED"/>
+      <xs:enumeration value="SNT_BASED_INVOICE_BRANCH_TO_HEAD_NOT_ALLOWED"/>
+      <xs:enumeration value="SNT_BASED_INVOICE_BRANCH_TO_BRANCH_OF_THE_SAME_HEAD_NOT_ALLOWED"/>
+      <xs:enumeration value="SNT_BASED_INVOICE_TRANSFER_TYPE_NOT_ALLOWED"/>
+      <xs:enumeration value="SNT_BASED_INVOICE_EXPORT_TYPE_NOT_ALLOWED"/>
+      <xs:enumeration value="SNT_BASED_INVOICE_IMPORT_TYPE_NOT_ALLOWED"/>
+      <xs:enumeration value="SNT_BASED_INVOICE_TRANSFER_INSIDE_ENTERPRISE_NOT_ALLOWED"/>
+      <xs:enumeration value="SNT_BASED_INVOICE_TRANSFER_PROJECT_NOT_ALLOWED"/>
+      <xs:enumeration value="SNT_BASED_INVOICE_SNT_STATUS_NOT_ALLOWED"/>
+      <xs:enumeration value="INVOICE_WITHOUT_SNT_NOT_ALLOWED"/>
+      <xs:enumeration value="INVOICE_WITHOUT_SNT_IN_EAEC_NOT_ALLOWED"/>
+      <xs:enumeration value="INVOICE_REQUIRED_NOT_RETURNED_SNT"/>
+      <xs:enumeration value="INVOICE_REQUIRED_RETURNED_SNT"/>
+      <xs:enumeration value="NON_SNT_ALLOWED_ONLY_FOR_PRIMARY"/>
+      <xs:enumeration value="NON_SNT_ALLOWED_ONLY_PRODUCT_ID_1"/>
+      <xs:enumeration value="NON_SNT_ALLOWED_ONLY_AFTER_SNT_RELEASE"/>
+      <xs:enumeration value="NON_SNT_NOT_ALLOWED"/>
+      <xs:enumeration value="GSVS_CODE_NOT_FOUND"/>
+      <xs:enumeration value="GSVS_IS_NOT_USE_IN_VS"/>
+      <xs:enumeration value="IMPORT_DOC_DATE_AFTER_USE_IN_VS_DATE"/>
+      <xs:enumeration value="IMPORT_DOC_DATE_AFTER_SNT_RELEASE"/>
+      <xs:enumeration value="UNIQUE_PRODUCT_REQUIRES_PHYSICAL_LABEL"/>
+      <xs:enumeration value="TNVED_CODE_DOES_NOT_MATCH_GSVS"/>
+      <xs:enumeration value="TNVED_CODE_NOT_USED_ANYMORE"/>
+      <xs:enumeration value="TNVED_CODE_INCORRECT"/>
+      <xs:enumeration value="INVALID_CAN_EXPORT"/>
+      <xs:enumeration value="INVALID_MEASURE_UNIT_CODE"/>
+      <xs:enumeration value="INVALID_EXCISE_RATE"/>
+      <xs:enumeration value="INVALID_COUNTRY_CODE"/>
+      <xs:enumeration value="NOT_UNIQUE_NUMBER_AND_DATE"/>
+      <xs:enumeration value="UNIQUE_PRODUCT_REQUIRES_ONE_IN_QUANTITY"/>
+      <xs:enumeration value="UNIQUE_PRODUCT_REQUIRES_ONE_OR_ZERO"/>
+      <xs:enumeration value="NOT_MATCH_SOURCE_PRODUCT"/>
+      <xs:enumeration value="MUST_NOT_MATCH_SOURCE_PRODUCT"/>
+      <xs:enumeration value="UNEXPECTED_ERROR"/>
+      <xs:enumeration value="INCORRECT_PRODUCT_SUM"/>
+      <xs:enumeration value="INCORRECT_TOTAL_SUM"/>
+      <xs:enumeration value="INCORRECT_SOURCE_TOTAL_SUM"/>
+      <xs:enumeration value="GSVS_IS_NOT_UNIQUE"/>
+      <xs:enumeration value="GSVS_CODE_NOT_ALLOWED"/>
+      <xs:enumeration value="GSVS_CODE_INVALID_FORMAT"/>
+      <xs:enumeration value="TNVED_CODE_DOES_NOT_EXISTS_IN_GSVS"/>
+      <xs:enumeration value="VS_PRODUCT_NEEDS_CONTRACT"/>
+      <xs:enumeration value="STORE_IS_NOT_INHERITED"/>
+      <xs:enumeration value="KOGD_NOT_FOUND"/>
+      <xs:enumeration value="UFORM_NOT_FOUND"/>
+      <xs:enumeration value="UFORM_SENDER_NOT_VALID"/>
+      <xs:enumeration value="UPLOAD_REORGANIZATION_FROM_API_IS_NOT_ALLOWED"/>
+      <xs:enumeration value="BALANCE_CORRECTION_CAN_PASS_ONLY_FROM_BALANCE"/>
+      <xs:enumeration value="BALANCE_WITHOUT_USE_VSTORE_FLAG_MOVEMENT_PROHIBITED"/>
+      <xs:enumeration value="PRODUCT_IS_USED_IN_VSTORE"/>
+      <xs:enumeration value="PRODUCT_IS_NOT_USED_IN_VSTORE"/>
+      <xs:enumeration value="UFORM_IMPORT_DETAILING_EXCEPTION"/>
+      <xs:enumeration value="UFORM_IMPORT_DETAILING_NOT_AVAILABLE"/>
+      <xs:enumeration value="UFORM_IMPORT_DETAILING_NO_PAYMENT_AVAILABLE"/>
+      <xs:enumeration value="UFORM_IMPORT_DETAILING_PRODUCT_ROW_ALREADY_DETAILED"/>
+      <xs:enumeration value="UFORM_IMPORT_DETAILING_PRODUCT_ROW_QUANTITY_NOT_EQUALS"/>
+      <xs:enumeration value="UFORM_MOBILE_STORE_FORMS_DISABLED"/>
+      <xs:enumeration value="UFORM_NUMBER_NOT_FILLED"/>
+      <xs:enumeration value="UFORM_PRODUCT_PRICE_ILLEGAL"/>
+      <xs:enumeration value="UFORM_PRODUCT_SUM_ILLEGAL"/>
+      <xs:enumeration value="UFORM_TOTAL_SUM_ILLEGAL"/>
+      <xs:enumeration value="UFORM_MEASURE_CONVERSION_INCORRECT"/>
+      <xs:enumeration value="GTD_FETCH_EXCEPTION"/>
+      <xs:enumeration value="GTD_NOT_FOUND"/>
+      <xs:enumeration value="GTD_PRODUCT_NOT_FOUND"/>
+      <xs:enumeration value="GTD_CROSSING_DUPLICATE"/>
+      <xs:enumeration value="FNO_NOT_FOUND"/>
+      <xs:enumeration value="FNO_PRODUCT_NOT_FOUND"/>
+      <xs:enumeration value="UFORM_IMPORT_DETAILING_PRODUCT_ROW_SUM_DIFFERS"/>
+      <xs:enumeration value="UFORM_IMPORT_DETAILING_PRODUCT_ROW_PRICE_DIFFERS"/>
+      <xs:enumeration value="UFORM_EDITING_TOTAL_SUM_DEFFIRES"/>
+      <xs:enumeration value="UFORM_EDITING_PROHIBITED"/>
+      <xs:enumeration value="UFORM_PACKING_PROHIBITED"/>
+      <xs:enumeration value="UFORM_PACKING_TRANSFORMATION_TNVED_CODE_NOT_ALLOWED"/>
+      <xs:enumeration value="INVOICE_FOR_DT_GOODS_PROHIBITED"/>
+      <xs:enumeration value="GTD_PRECEEDING_NUMBERS_DEFFICIENCE"/>
+      <xs:enumeration value="UFORM_PACKING_PRODUCTS_DIFFERENCE"/>
+      <xs:enumeration value="UFORM_WRITE_OFF_REASON_WRONG_VALUE"/>
+      <xs:enumeration value="UFORM_WRITE_OFF_REASON_SNT_RELEASE_REQUIRED"/>
+      <xs:enumeration value="UFORM_WRITE_OFF_RETAIL_GOODS_PROHIBITED_WRITEOFF"/>
+      <xs:enumeration value="UFORM_WRITE_OFF_OIL_PINCODE_NOT_FOUND"/>
+      <xs:enumeration value="UFORM_WRITE_OFF_PROHIBITED_REASON"/>
+      <xs:enumeration value="UFORM_WRITE_OFF_RECIPIENT_PROHIBITED"/>
+      <xs:enumeration value="UFORM_CANCEL_PROHIBITED_HAS_REVOKED_INVOICES"/>
+      <xs:enumeration value="UFORM_DETAILING_EDITING_IMPOSSIBLE"/>
+      <xs:enumeration value="AWP_SENDER_TIN_NOT_EQUALS_WITH_TIN_IN_SESSION"/>
+      <xs:enumeration value="AWP_TIN_ABSENT_IN_DICTIONARY"/>
+      <xs:enumeration value="AWP_SENDER_NOT_VALID"/>
+      <xs:enumeration value="AWP_ACCESS_DENIED"/>
+      <xs:enumeration value="AWP_WRONG_ACTION"/>
+      <xs:enumeration value="AWP_NOT_FOUND"/>
+      <xs:enumeration value="AWP_INCORRECT_STATUS_FOR_DELETE"/>
+      <xs:enumeration value="AWP_SENDER_DO_NOT_HAVE_RELATION_WITH_BRANCH"/>
+      <xs:enumeration value="AWP_SENDER_IS_NOT_SHARING_PARTICIPANT"/>
+      <xs:enumeration value="AWP_SENDER_PROJECT_NOT_FOUND"/>
+      <xs:enumeration value="AWP_RECIPIENT_DO_NOT_HAVE_RELATION_WITH_BRANCH"/>
+      <xs:enumeration value="AWP_RECIPIENT_IS_NOT_SHARING_PARTICIPANT"/>
+      <xs:enumeration value="AWP_RECIPIENT_PROJECT_NOT_FOUND"/>
+      <xs:enumeration value="AWP_TAXPAYER_IS_NOT_NDS_PAYER"/>
+      <xs:enumeration value="AWP_INVOICE_PREFILLING_PROHIBITED"/>
+      <xs:enumeration value="AWP_RELATED_AWP_DATE_INVALID"/>
+      <xs:enumeration value="AWP_RELATED_AWP_NOT_FOUND"/>
+      <xs:enumeration value="AWP_RELATED_AWP_DATE_EXPIRED"/>
+      <xs:enumeration value="AWP_RELATED_AWP_INVALID_STATUS"/>
+      <xs:enumeration value="AWP_MAIN_AND_FIXED_AWP_NOT_EQUALS"/>
+      <xs:enumeration value="ISGO_EMPTY_INVOICES_LIST"/>
+      <xs:enumeration value="ISGO_TOO_MANY_PARTICIPANTS"/>
+      <xs:enumeration value="ISGO_INVALID_SENDER"/>
+      <xs:enumeration value="ISGO_INVALID_INVOICE_STATUS"/>
+      <xs:enumeration value="ISGO_INVOICE_NOT_FOUND"/>
+      <xs:enumeration value="ISGO_TOO_MANY_SYSTEMS"/>
+      <xs:enumeration value="ISGO_TOO_MANY_SUBSIDIES"/>
+      <xs:enumeration value="ISGO_INVOICE_DOUBLE"/>
+      <xs:enumeration value="ISGO_SYSTEM_NOT_FOUND"/>
+      <xs:enumeration value="ISGO_SUBSIDY_NOT_FOUND"/>
+      <xs:enumeration value="ISGO_SYSTEM_BLOCKED"/>
+      <xs:enumeration value="ISGO_INVALID_SET_OF_INVOICES"/>
+      <xs:enumeration value="ISGO_INVALID_ISGO_INVOICE_STATUS"/>
+      <xs:enumeration value="ISGO_INVALID_APPROVER"/>
+      <xs:enumeration value="ISGO_SYSTEM_NOT_NEED_CONFIRMATION"/>
+      <xs:enumeration value="ISGO_ISGO_INVOICE_NOT_FOUND"/>
+      <xs:enumeration value="ISGO_CONFIRM_PART_OF_PACKAGE"/>
+      <xs:enumeration value="ISGO_TOO_MANY_INVOICES"/>
+      <xs:enumeration value="ISGO_PACKET_SIZE_EXCEEDED"/>
+      <xs:enumeration value="ISGO_INVOICE_ALREADY_SENT"/>
+      <xs:enumeration value="ISGO_CHAIN_CONTAINS_ERROR"/>
+      <xs:enumeration value="ISGO_SNT_NOT_CONFIRMED"/>
+      <xs:enumeration value="NDS_INVALID_MESSAGE_FORMAT"/>
+      <xs:enumeration value="RELATED_ECONTRACT_NOT_FOUND"/>
+      <xs:enumeration value="RELATED_ECONTRACT_DATE_AND_NUMBER_NOT_MATCH_REGISTRATION_NUMBER"/>
+      <xs:enumeration value="RELATED_ECONTRACT_MUST_NOT_BE_CESSION"/>
+      <xs:enumeration value="RELATED_ECONTRACT_HAS_WRONG_STATUS"/>
+      <xs:enumeration value="PARTICIPANT_IS_NOT_ACTIVE_IN_RELATED_ECONTRACT"/>
+      <xs:enumeration value="STAGE_IMPLEMENTATION_DEADLINE_NOT_MAX"/>
+      <xs:enumeration value="STAGE_PAYMENT_DEADLINE_NOT_MAX"/>
+      <xs:enumeration value="STAGE_TOTAL_SUM_INCORRECT"/>
+      <xs:enumeration value="ECONTRACT_IMPLEMENTATION_DEADLINE_NOT_MAX"/>
+      <xs:enumeration value="ECONTRACT_INCORRECT_STATUS_FOR_DELETE"/>
+      <xs:enumeration value="ECONTRACT_PAYMENT_DEADLINE_NOT_MAX"/>
+      <xs:enumeration value="ECONTRACT_TOTAL_SUM_INCORRECT"/>
+      <xs:enumeration value="ECONTRACT_ACCESS_DENIED"/>
+      <xs:enumeration value="ECONTRACT_NO_REASON_TO_PROCESS"/>
+      <xs:enumeration value="ECONTRACT_NOT_FOUND"/>
+      <xs:enumeration value="ECONTRACT_PARTICIPANTS_DIFFERS"/>
+      <xs:enumeration value="ECONTRACT_GWS_PARTICIPANTS_DIFFERS"/>
+      <xs:enumeration value="ECONTRACT_WRONG_ACTION"/>
+      <xs:enumeration value="PAYMENT_DATE_MUST_BE_AFTER_PREVIOUS"/>
+      <xs:enumeration value="DEBT_AT_START_MUST_BE_EQUAL_TO_PREVIOUS_DEBT_AT_END"/>
+      <xs:enumeration value="DEBT_AT_END_MUST_NOT_BE_GREATER_THAN_DEBT_AT_START"/>
+      <xs:enumeration value="LOAN_AMOUNT_MUST_BE_EQUAL_TO_PAYMENTS_SUM"/>
+      <xs:enumeration value="LOAN_AMOUNT_MUST_BE_EQUAL_TO_FIRST_PAYMENT_DEBT"/>
+      <xs:enumeration value="PAYMENTS_NUMBER_MUST_BE_EQUAL_TO_ROWS_COUNT"/>
+      <xs:enumeration value="LAST_PAYMENT_DEBT_AT_END_MUST_BE_ZERO"/>
+      <xs:enumeration value="PAYMENT_START_DATE_NOT_MATCH_FIRST_PAYMENT_DATE"/>
+      <xs:enumeration value="PAYMENT_END_DATE_NOT_MATCH_LAST_PAYMENT_DATE"/>
+      <xs:enumeration value="ECONTRACT_SIBLING_HAS_NOT_FINAL_STATUS"/>
+      <xs:enumeration value="ECONTRACT_WRONG_REGISTRATION_NUMBER"/>
+      <xs:enumeration value="EOKNO_REQUEST_IS_NULL"/>
+      <xs:enumeration value="EOKNO_TIN_IS_NULL"/>
+      <xs:enumeration value="EOKNO_TIN_IS_NOT_12_SIZE"/>
+      <xs:enumeration value="EOKNO_TAXPAYER_NOT_FOUND"/>
+      <xs:enumeration value="EOKNO_REGISTRATION_INFO_NOT_FOUND"/>
+      <xs:enumeration value="TRANSIT_NOT_FOUND"/>
+      <xs:enumeration value="TRANSIT_INVALID_STATE"/>
+      <xs:enumeration value="TRANSIT_IMPORT_FIELDS_CHANGED"/>
+      <xs:enumeration value="TRANSIT_FILE_NOT_FOUND"/>
+      <xs:enumeration value="TRANSIT_INVALID_IIN"/>
+      <xs:enumeration value="TRANSIT_INVALID_CHECKPOINT"/>
+      <xs:enumeration value="TRANSIT_CHECKPOINT_NOT_EXPORT_CONTROL"/>
+      <xs:enumeration value="TRANSIT_CONTAINS_BANNED_GOODS"/>
+      <xs:enumeration value="TRANSIT_CONTAINS_WITHDRAWAL_GOODS"/>
+      <xs:enumeration value="TRANSIT_ESF_REG_NUMBER_IS_NULL"/>
+      <xs:enumeration value="TRANSIT_CONTAINS_BANNED_TAXPAYER"/>
+      <xs:enumeration value="TRANSIT_TAXPAYER_IS_BLOCKED_BY_REASON"/>
+      <xs:enumeration value="TRANSIT_CONTAINS_TAXPAYER_BLOCKED_BY_DEATH"/>
+      <xs:enumeration value="TRANSIT_CONTAINS_TAXPAYER_BLOCKED_BY_NON_PARTICIPATION_IN_IMPORT"/>
+      <xs:enumeration value="TRANSIT_CONTAINS_TAXPAYER_BLOCKED_BY_BANKRUPT"/>
+      <xs:enumeration value="TRANSIT_CONTAINS_TAXPAYER_BLOCKED_BY_LIQUIDATION"/>
+      <xs:enumeration value="TRANSIT_CONTAINS_TAXPAYER_BLOCKED_BY_DB_EXCLUDE"/>
+      <xs:enumeration value="TRANSIT_CONTAINS_TAXPAYER_BLOCKED_BY_ENTITY_LIQUIDATION"/>
+      <xs:enumeration value="TRANSIT_CONTAINS_TAXPAYER_BLOCKED_BY_BUSINESS_TERMINATION"/>
+      <xs:enumeration value="TRANSIT_CONTAINS_TAXPAYER_BLOCKED_BY_TERMINATION"/>
+      <xs:enumeration value="TRANSIT_CONTAINS_TAXPAYER_BLOCKED_BY_REGISTRATION_HAS_INVALID"/>
+      <xs:enumeration value="TRANSIT_CONTAINS_TAXPAYER_BLOCKED_BY_REGISTRATION_HAS_INVALID_ADD_CODE_1"/>
+      <xs:enumeration value="TRANSIT_CONTAINS_TAXPAYER_BLOCKED_BY_REGISTRATION_HAS_INVALID_ADD_CODE_2"/>
+      <xs:enumeration value="TRANSIT_CONTAINS_TAXPAYER_BLOCKED_BY_REGISTRATION_HAS_INVALID_ADD_CODE_3"/>
+      <xs:enumeration value="TRANSIT_CONTAINS_TAXPAYER_BLOCKED_BY_REGISTRATION_HAS_INVALID_ADD_CODE_4"/>
+      <xs:enumeration value="TRANSIT_CONTAINS_TAXPAYER_BLOCKED_BY_REGISTRATION_HAS_INVALID_ADD_CODE_5"/>
+      <xs:enumeration value="TRANSIT_CONTAINS_TAXPAYER_BLOCKED_BY_FAKE"/>
+      <xs:enumeration value="TRANSIT_CONTAINS_TAXPAYER_BLOCKED_BY_FAKE_ADD_CODE_1"/>
+      <xs:enumeration value="TRANSIT_CONTAINS_TAXPAYER_BLOCKED_BY_FAKE_ADD_CODE_2"/>
+      <xs:enumeration value="TRANSIT_CONTAINS_UNRELIABLE_CARRIER"/>
+      <xs:enumeration value="TRANSIT_CONTAINS_UNRELIABLE_AUTO"/>
+      <xs:enumeration value="TRANSIT_CARRIER_INFO_ALREADY_EDITED"/>
+      <xs:enumeration value="TRANSIT_WRONG_IMPORT_DATE"/>
+      <xs:enumeration value="TRANSIT_WRONG_EXPORT_DATE"/>
+      <xs:enumeration value="SHOULD_BE_NULL"/>
+      <xs:enumeration value="MAIN_AND_ADDITIONAL_SNT_NOT_EQUALS"/>
+      <xs:enumeration value="SNT_REASON_PAPER_NOT_NULL"/>
+      <xs:enumeration value="SNT_SENDER_TIN_NOT_EQUALS_WITH_TIN_IN_SESSION"/>
+      <xs:enumeration value="SNT_CREATE_ACCESS_DENIED"/>
+      <xs:enumeration value="SNT_SENDER_NOT_VALID"/>
+      <xs:enumeration value="SNT_CUSTOMER_NOT_VALID"/>
+      <xs:enumeration value="SNT_ACCESS_DENIED"/>
+      <xs:enumeration value="SNT_WRONG_ACTION"/>
+      <xs:enumeration value="SNT_CONFIRM_DECLINE_DENIED"/>
+      <xs:enumeration value="SNT_NOT_FOUND"/>
+      <xs:enumeration value="SNT_WRONG_VERSION"/>
+      <xs:enumeration value="SNT_PRIMARY_SNT_NOT_FOUND"/>
+      <xs:enumeration value="SNT_PRIMARY_SNT_FOR_IMPORT_NOT_FOUND"/>
+      <xs:enumeration value="SNT_FIXED_SNT_CAN_BE_RELATED_ONLY_TO_PRIMARY"/>
+      <xs:enumeration value="SNT_FIXED_SNT_CAN_BE_CREATED_BY_LESSOR_ONLY"/>
+      <xs:enumeration value="SNT_RETURNED_SNT_CANNOT_BE_RELATED_TO_RETURNED"/>
+      <xs:enumeration value="SNT_RETURNED_SNT_CANNOT_BE_RELATED_WITH_AIRCRAFT_REFUELING"/>
+      <xs:enumeration value="SNT_RETURNED_SNT_UTILIZE_BEER"/>
+      <xs:enumeration value="SNT_RELATED_SNT_DATE_EXPIRED"/>
+      <xs:enumeration value="SNT_FIXED_SNT_DATE_EXPIRED"/>
+      <xs:enumeration value="SNT_FIXED_SNT_WITH_EXCISABLE_DATE_EXPIRED"/>
+      <xs:enumeration value="SNT_FIXED_SNT_WITH_TRANSPORT_PIPELINEOR_NULL"/>
+      <xs:enumeration value="SNT_FIXED_SNT_DECLINED_DATE_EXPIRED"/>
+      <xs:enumeration value="SNT_INCORRECT_STATUS_FOR_DELETE"/>
+      <xs:enumeration value="SNT_TIN_IS_NOT_SHARING_AGREEMENT"/>
+      <xs:enumeration value="SNT_CONFIRM_CAUSE_NOT_NULL"/>
+      <xs:enumeration value="SNT_DECLINE_CAUSE_IS_NULL"/>
+      <xs:enumeration value="SNT_CANCEL_CAUSE_IS_NULL"/>
+      <xs:enumeration value="SNT_CANCEL_PERIOD_EXPIRED"/>
+      <xs:enumeration value="SNT_WRONG_STATUS"/>
+      <xs:enumeration value="SNT_CREATOR_WITHOUT_KOGD"/>
+      <xs:enumeration value="SNT_CONFIRM_NEED_INSPECTOR_OGD_CONFIRMATION"/>
+      <xs:enumeration value="SNT_SHIPPING_DATE_BEFORE_PRIMARY"/>
+      <xs:enumeration value="SNT_SHIPPING_TRANSPORT_WRONG_CATEGORY"/>
+      <xs:enumeration value="SNT_PRODUCT_NUMBER_NOT_FOUND_IN_PRIMARY"/>
+      <xs:enumeration value="SNT_PRODUCT_NUMBERS_NONSEQUENTIAL"/>
+      <xs:enumeration value="SNT_PRODUCT_EXCISE_AMOUNT_INCORRECT"/>
+      <xs:enumeration value="SNT_HAS_CONFIRMED_SNT_IN_CHAIN_CONFIRM_DENIED"/>
+      <xs:enumeration value="SNT_HAS_CONFIRMED_SNT_IN_CHAIN_DECLINE_DENIED"/>
+      <xs:enumeration value="SNT_CONFIRM_DATE_SHOULD_BE_FUTURE"/>
+      <xs:enumeration value="SNT_DECLINE_FOR_PILOT_DENIED"/>
+      <xs:enumeration value="SHARING_PARTICIPANT_STATUS_REQUIRED"/>
+      <xs:enumeration value="PRINCIPAL_STATUS_REQUIRED"/>
+      <xs:enumeration value="SNT_NOTIFICATION_TIN_NOT_EQUALS_WITH_TIN_IN_SESSION"/>
+      <xs:enumeration value="SNT_NOTIFICATION_PROJECT_CODE_NOT_EQUALS_WITH_PROJECT_CODE_IN_SESSION"/>
+      <xs:enumeration value="SNT_NOTIFICATION_PARTICIPANT_TYPE_NOT_EQUALS_WITH_PARTICIPANT_TYPE_IN_SESSION"/>
+      <xs:enumeration value="SNT_NOTIFICATION_ALREADY_SIGNED"/>
+      <xs:enumeration value="SNT_NOTIFICATION_XML_NOT_EQUALS_ORIGINAL"/>
+      <xs:enumeration value="SNT_NOTIFICATION_XML_NOT_FOUND"/>
+      <xs:enumeration value="SNT_NOTIFICATION_NOT_FOUND"/>
+      <xs:enumeration value="SNT_MOBILE_STORE_INCOMPATIBLE_WITH_TRANSFER_TYPE"/>
+      <xs:enumeration value="SNT_MOBILE_STORE_AUTOMOBILE_NOT_SELECTED"/>
+      <xs:enumeration value="SNT_MOBILE_STORE_INCORRECT"/>
+      <xs:enumeration value="SNT_MOBILE_STORE_NOT_ALLOWED_PRODUCTS"/>
+      <xs:enumeration value="SNT_MOBILE_STORE_CUSTOMER_COUNTRY_INCORRECT"/>
+      <xs:enumeration value="SNT_MOBILE_STORE_OPERATION_CODE_INVALID"/>
+      <xs:enumeration value="SNT_STORE_BOTH_RAW_MATERIAL"/>
+      <xs:enumeration value="FNO_MATCHING_WRONG_SIGNATURE"/>
+      <xs:enumeration value="FNO_MATCHING_CREATOR_TIN_NOT_EQUALS_WITH_TIN_IN_SESSION"/>
+      <xs:enumeration value="FNO_MATCHING_NOT_FOUND"/>
+      <xs:enumeration value="FNO_MATCHING_NO_FNO_FOUND"/>
+      <xs:enumeration value="FNO_MATCHING_NO_SOURCE_FOUND"/>
+      <xs:enumeration value="FNO_MATCHING_FNO_PRODUCT_DIFFERS"/>
+      <xs:enumeration value="FNO_MATCHING_SOURCE_WRONG_STATUS"/>
+      <xs:enumeration value="FNO_MATCHING_SOURCE_WRONG_VERSION"/>
+      <xs:enumeration value="FNO_MATCHING_SOURCE_PRODUCT_DIFFERS"/>
+      <xs:enumeration value="FNO_MATCHING_SOURCE_PRODUCT_VM_DIFFERS"/>
+      <xs:enumeration value="FNO_MATCHING_SOURCE_PRODUCT_COUNT_DIFFERS"/>
+      <xs:enumeration value="FNO_MATCHING_SOURCE_PRODUCT_REMAINDS_DIFFERS"/>
+      <xs:enumeration value="FNO_MATCHING_SOURCE_PRODUCT_VM_NOT_FOUND"/>
+      <xs:enumeration value="FNO_MATCHING_SOURCE_FNO_DUPLICATES"/>
+      <xs:enumeration value="FNO_MATCHING_SOURCE_DUPLICATES"/>
+      <xs:enumeration value="FNO_MATCHING_FNO_NOT_FILLED"/>
+      <xs:enumeration value="FNO_MATCHING_SOURCE_FNO_NOT_ALL_ROWS_MAPPED"/>
+      <xs:enumeration value="FNO_MATCHING_SUM_DIFFERS"/>
+      <xs:enumeration value="FNO_MATCHING_FNO_ACCESS_DENIED"/>
+      <xs:enumeration value="FNO_MATCHING_VM_ALREADY_LINKED"/>
+      <xs:enumeration value="FNO_MATCHING_VM_ALREADY_NOT_LINKED"/>
+      <xs:enumeration value="FNO_MATCHING_FNO_ALREADY_LINKED"/>
+      <xs:enumeration value="FNO_MATCHING_ILLEGAL_ACTION"/>
+      <xs:enumeration value="FNO_MATCHING_ACCESS_DENIED"/>
+      <xs:enumeration value="FNO_MATCHING_SOURCE_FNO_PRODUCT_DIFFERS"/>
+      <xs:enumeration value="FNO_MATCHING_CANCEL_UNAVAILABLE"/>
+      <xs:enumeration value="FNO_MATCHING_CANCEL_UNAVAILABLE_HAS_RESERVES"/>
+      <xs:enumeration value="FNO_MATCHING_CONVERTION_IMPORT_ONLY_ALLOWED"/>
+      <xs:enumeration value="FNO_MATCHING_CONVERTION_SELLER_COUNTRY_DIFFERS"/>
+      <xs:enumeration value="FNO_MATCHING_DUPPLICATE_NUMBER"/>
+      <xs:enumeration value="FNO_MATCHING_TNVED_HAS_NO_SUCCESSOR"/>
+      <xs:enumeration value="FNO_MATCHING_TNVED_HAS_SUCCESSOR"/>
+      <xs:enumeration value="FNO_MATCHING_AUTO_CANCELLED"/>
+      <xs:enumeration value="SNT_DT_MORE_THAN_ONE_DT_POINTED"/>
+      <xs:enumeration value="SNT_DT_SOME_GOODS_ARE_NOT_MAPPED"/>
+      <xs:enumeration value="SNT_DT_SOME_GOODS_ARE_NOT_EXISTED"/>
+      <xs:enumeration value="SNT_DT_SOME_GOODS_QUANTITY_DIFFERS"/>
+      <xs:enumeration value="SNT_GTD_MOVE_PROHIBITED"/>
+      <xs:enumeration value="GTD_REMAINS_NOT_FOUND"/>
+      <xs:enumeration value="GTD_NUMBER_INVALID"/>
+      <xs:enumeration value="SNT_DIGITAL_MARKING_INVALID"/>
+      <xs:enumeration value="SNT_DIGITAL_MARKING_FIXED_INVALID_REG_NUMBER_TYPE"/>
+      <xs:enumeration value="SNT_DIGITAL_MARKING_HAS_LATEST_VERSION"/>
+      <xs:enumeration value="SNT_DIGITAL_MARKING_INVALID_PAPER_REASON"/>
+      <xs:enumeration value="SNT_DIGITAL_MARKING_INVALID_MPT_TYPE_ACCEPTANCE_CERTIFICATE"/>
+      <xs:enumeration value="SNT_DIGITAL_MARKING_INVALID_DATE"/>
+      <xs:enumeration value="SNT_DIGITAL_MARKING_PROVIDED_PARTLY_OR_FULLY"/>
+      <xs:enumeration value="SNT_DIGITAL_MARKING_INVALID_QUANTITY"/>
+      <xs:enumeration value="SNT_DIGITAL_MARKING_INVALID_SUPPLIER_TIN"/>
+      <xs:enumeration value="SNT_DIGITAL_MARKING_INVALID_CUSTOMER_TIN"/>
+      <xs:enumeration value="SNT_DIGITAL_MARKING_INVALID_MPT_TYPE_NOTIFICATION"/>
+      <xs:enumeration value="SNT_DIGITAL_MARKING_ODD_PRODUCTS_SETS"/>
+      <xs:enumeration value="SNT_DIGITAL_MARKING_CUSTOMER_TIN"/>
+      <xs:enumeration value="SNT_DIGITAL_MARKING_VERSION_NOT_SUPPORTER"/>
+      <xs:enumeration value="SNT_DIGITAL_MARKING_INVALID_GTIN"/>
+      <xs:enumeration value="SNT_DIGITAL_MARKING_INVALID_TNVED"/>
+      <xs:enumeration value="SNT_DIGITAL_MARKING_PRODUCT_WAS_PROVIDED"/>
+      <xs:enumeration value="SNT_DIGITAL_MARKING_INVALID_PRODUCTS"/>
+      <xs:enumeration value="SNT_DIGITAL_MARKING_INVALID_STATUS_FOR_ACCEPT"/>
+      <xs:enumeration value="SNT_DIGITAL_MARKING_INVALID_STATUS_FOR_DECLINED"/>
+      <xs:enumeration value="SNT_DIGITAL_MARKING_INVALID_STATUS_FOR_REVOKED"/>
+      <xs:enumeration value="SNT_PLANNED_CHECKPOINT_NOT_FOUND"/>
+      <xs:enumeration value="SNT_PLANNED_CHECKPOINT_HAS_INCOMPATIBLE_TYPE"/>
+      <xs:enumeration value="SNT_OIL_OVD_NOT_FOUND"/>
+      <xs:enumeration value="SNT_TOBACCO_OVD_NOT_FOUND"/>
+      <xs:enumeration value="SNT_ALCOHOL_LICENSE_NOT_FOUND"/>
+      <xs:enumeration value="SNT_TAXPAYER_STORE_HAS_NO_OIL_OVD_RELATION"/>
+      <xs:enumeration value="SNT_TAXPAYER_STORE_HAS_NO_TOBACCO_OVD_RELATION"/>
+      <xs:enumeration value="SNT_TAXPAYER_STORE_HAS_NO_ALCOHOL_LICENSE_RELATION"/>
+      <xs:enumeration value="SNT_ACTUAL_ADDRESS_DO_NOT_MATCHES_WITH_STORE_NAME_FOR_SELLER"/>
+      <xs:enumeration value="SNT_ACTUAL_ADDRESS_DO_NOT_MATCHES_WITH_STORE_OVD_NAME_FOR_SELLER"/>
+      <xs:enumeration value="SNT_ACTUAL_ADDRESS_DO_NOT_MATCHES_WITH_STORE_NAME_FOR_CUSTOMER"/>
+      <xs:enumeration value="SNT_ACTUAL_ADDRESS_DO_NOT_MATCHES_WITH_STORE_OVD_NAME_FOR_CUSTOMER"/>
+      <xs:enumeration value="OIL_OVD_DELETED"/>
+      <xs:enumeration value="TOBACCO_OVD_DELETED"/>
+      <xs:enumeration value="ALCOHOL_LICENSE_DELETED"/>
+      <xs:enumeration value="TAXPAYER_STORE_HAS_LINK_WITH_OVD_OR_LICENSE"/>
+      <xs:enumeration value="SNT_CUSTOMER_TAXPAYER_STORE_IS_CLOSED"/>
+      <xs:enumeration value="SNT_SELLER_TAXPAYER_STORE_IS_CLOSED"/>
+      <xs:enumeration value="ARCHIVE_STORE_NOT_ALLOWED"/>
+      <xs:enumeration value="ARCHIVE_STORE_CANNOT_CREATE"/>
+      <xs:enumeration value="ARCHIVE_STORE_CANNOT_EDIT"/>
+      <xs:enumeration value="ARCHIVE_STORE_CLOSED"/>
+      <xs:enumeration value="ARCHIVE_STORE_NEED_RETAIL"/>
+      <xs:enumeration value="SNT_SELLER_TIN_NOT_EQUALS_CREATOR_TIN"/>
+      <xs:enumeration value="SNT_SELLER_STATUS_NOT_EQUAL_TO_PRIMARY"/>
+      <xs:enumeration value="SNT_TIN_IS_EMPTY"/>
+      <xs:enumeration value="SNT_SELLER_TIN_ABSENT_IN_DICTIONARY"/>
+      <xs:enumeration value="SNT_SELLER_REORGANIZED_TIN_ABSENT_IN_DICTIONARY"/>
+      <xs:enumeration value="SNT_SELLER_DO_NOT_HAVE_RELATION_WITH_BRANCH"/>
+      <xs:enumeration value="SNT_SELLER_DO_NOT_HAVE_RELATION_WITH_SHOW_SNT_FLAG"/>
+      <xs:enumeration value="SNT_SELLER_CERTIFICATE_DETAILS_NOT_VALID"/>
+      <xs:enumeration value="SNT_SELLER_WRONG_NDS_PROP"/>
+      <xs:enumeration value="SNT_SELLER_TIN_IS_HEAD"/>
+      <xs:enumeration value="SNT_SELLER_LICENSE_NUMBER_NOT_FOUND"/>
+      <xs:enumeration value="SNT_CUSTOMER_LICENSE_NUMBER_NOT_NULL"/>
+      <xs:enumeration value="SNT_SELLER_LICENSE_ADDRESS_NOT_VALID"/>
+      <xs:enumeration value="SNT_SELLER_CANNOT_CREATE_RETURNED_SNT"/>
+      <xs:enumeration value="SNT_CUSTOMER_CANNOT_CREATE_RETURNED_SNT"/>
+      <xs:enumeration value="SNT_SELLER_COUNTRY_CODE_EAEC"/>
+      <xs:enumeration value="SNT_ALCOHOL_LICENSE_NOT_EQUALS_STORE_LICENSE"/>
+      <xs:enumeration value="SNT_ALCOHOL_LICENSE_NOT_EQUALS_LICENSE_ADDRESS"/>
+      <xs:enumeration value="SNT_CUSTOMER_TIN_ABSENT_IN_DICTIONARY"/>
+      <xs:enumeration value="SNT_CUSTOMER_REORGANIZED_TIN_ABSENT_IN_DICTIONARY"/>
+      <xs:enumeration value="SNT_CUSTOMER_DO_NOT_HAVE_RELATION_WITH_BRANCH"/>
+      <xs:enumeration value="SNT_CUSTOMER_COUNTRY_CODE_NOT_EAEC"/>
+      <xs:enumeration value="SNT_CUSTOMER_COUNTRY_CODE_EAEC"/>
+      <xs:enumeration value="SNT_CUSTOMER_AGENT_DOC_NOT_AVAILABLE"/>
+      <xs:enumeration value="SNT_CUSTOMER_AGENT_DOC_NUM_IS_NULL"/>
+      <xs:enumeration value="SNT_CUSTOMER_AGENT_DOC_DATE_IS_NULL"/>
+      <xs:enumeration value="SNT_CUSTOMER_LICENSE_NUMBER_NOT_FOUND"/>
+      <xs:enumeration value="SNT_CUSTOMER_LICENSE_ADDRESS_NOT_VALID"/>
+      <xs:enumeration value="SNT_CUSTOMER_TIN_ONLY_IIN"/>
+      <xs:enumeration value="SNT_REGISTER_COUNTRY_CODE_EAEC"/>
+      <xs:enumeration value="SNT_IMPORT_FROM_NOT_EAEC_DISABLED"/>
+      <xs:enumeration value="SNT_CUSTOMER_IS_NOT_SMALL_RETAIL_OUTLET"/>
+      <xs:enumeration value="SNT_CUSTOMER_IS_SMALL_RETAIL_OUTLET"/>
+      <xs:enumeration value="SNT_CUSTOMER_STATUS_NOT_EQUAL_TO_PRIMARY"/>
+      <xs:enumeration value="SNT_SMALL_RETAIL_OUTLET_DENIED"/>
+      <xs:enumeration value="SNT_IMPORT_REQUIRED"/>
+      <xs:enumeration value="SNT_IMPORT_REMAINDS_MOVED"/>
+      <xs:enumeration value="SNT_IMPORT_MATCHING_DONE"/>
+      <xs:enumeration value="SNT_STORE_ID_IS_NULL"/>
+      <xs:enumeration value="SNT_STORE_ID_NOT_NULL"/>
+      <xs:enumeration value="SNT_SELLER_AND_CUSTOMER_HAS_NO_RELATION"/>
+      <xs:enumeration value="SNT_CONSIGNEE_TIN_ABSENT_IN_DICTIONARY"/>
+      <xs:enumeration value="SNT_CONSIGNOR_TIN_ABSENT_IN_DICTIONARY"/>
+      <xs:enumeration value="SNT_TRANSPORTER_TIN_ABSENT_IN_DICTIONARY"/>
+      <xs:enumeration value="SNT_CONTRACT_SUPPLY_TERM_NOT_FOUND"/>
+      <xs:enumeration value="SNT_RETURNED_SNT_ON_DELIVERED_SNT_ERROR"/>
+      <xs:enumeration value="SNT_RETURNED_SNT_ON_NOT_CONFIRMED_SNT_WITH_RETAILER_ERROR"/>
+      <xs:enumeration value="SNT_RETURNED_QUANTITY_DEFICIENCY"/>
+      <xs:enumeration value="VIRTUAL_LABEL_FLK"/>
+      <xs:enumeration value="EGP_AWP_PARTICIPANT_IS_NULL"/>
+      <xs:enumeration value="EGP_AWP_INVOICE_DELIVERY_NUM_NOT_FOUND"/>
+      <xs:enumeration value="EGP_AWP_INVOICE_PROHIBITED_MULTIPLE_INVOICE_CREATION"/>
+      <xs:enumeration value="EGP_AWP_INVOICE_CUSTOMER_NOT_EQUAL"/>
+      <xs:enumeration value="EGP_AWP_NOT_FOUND"/>
+      <xs:enumeration value="EGP_AWP_STATUS_NOT_VALID"/>
+      <xs:enumeration value="EGP_CONTRACT_STATUS_NOT_VALID"/>
+      <xs:enumeration value="EGP_CONTRACT_NOT_FOUND"/>
+      <xs:enumeration value="EGP_CONTRACT_HAS_DUPPLICATE_NUMBER"/>
+      <xs:enumeration value="EGP_CONTRACT_INVOICE_PROHIBITED_MULTIPLE_INVOICE_CREATION"/>
+      <xs:enumeration value="EGP_WRONG_RELATIONS"/>
+      <xs:enumeration value="EGP_AWP_INVOICE_FIELD_DIFFERS"/>
+      <xs:enumeration value="EGP_AWP_INVOICE_SNT_BASED_PRODUCT_FIELD_DIFFERS"/>
+      <xs:enumeration value="EGP_CONTRACT_INVOCIE_FIELD_DIFFERS"/>
+      <xs:enumeration value="EGP_DUPLICATE"/>
+      <xs:enumeration value="EGP_ESF_PREFILL_ERROR"/>
+      <xs:enumeration value="EGP_ESF_ROOT_DOCUMENT_PROHIBITED_STATUS"/>
+      <xs:enumeration value="PIN_CODE_NOT_FOUND"/>
+      <xs:enumeration value="PIN_TYPE_NOT_FOUND"/>
+      <xs:enumeration value="PIN_CODE_OWNER_DIFFERS"/>
+      <xs:enumeration value="SNT_TNVED_CODE_NOT_FOUND"/>
+      <xs:enumeration value="SNT_TNVED_CODE_IS_BANNED"/>
+      <xs:enumeration value="SNT_TNVED_CODE_CANT_BE_EMPTY"/>
+      <xs:enumeration value="SNT_TNVED_CODE_INCONSISTENT"/>
+      <xs:enumeration value="SNT_TNVED_IS_EXCISABLE_IN_WRONG_SECTION"/>
+      <xs:enumeration value="SNT_TNVED_ZVT_PROHIBITED"/>
+      <xs:enumeration value="SNT_GSVS_CODE_INCONSISTENT"/>
+      <xs:enumeration value="SNT_DECLARATION_NUMBER_CANT_BE_EMPTY"/>
+      <xs:enumeration value="SNT_PRODUCT_CONDITIONALLY_RELEASED"/>
+      <xs:enumeration value="SNT_PRODUCT_PERMISSIVE_DOCUMENT_NUMBER_CANT_BE_EMPTY"/>
+      <xs:enumeration value="SNT_PRODUCT_NAME_NOT_EQUALS_WITH_PIN_PRODUCT_NAME"/>
+      <xs:enumeration value="SNT_PRODUCTION_TYPE_NOT_EQUALS_WITH_PIN_PRODUCTTION_TYPE"/>
+      <xs:enumeration value="SNT_PRODUCT_SPIRIT_PERCENT_NOT_EQUALS_WITH_PIN_SPIRIT_PERCENT"/>
+      <xs:enumeration value="SNT_PRODUCT_SPIRIT_PERCENT_NOT_EQUALS_DB"/>
+      <xs:enumeration value="SNT_PRODUCT_PRODUCT_ID_CANT_BE_EMPTY"/>
+      <xs:enumeration value="SNT_PRODUCT_PRODUCT_ID_MUST_BE_EMPTY"/>
+      <xs:enumeration value="SNT_PRODUCT_PRODUCT_ID_WRONG_FORMAT"/>
+      <xs:enumeration value="SNT_PRODUCT_NUMBER_IN_DECLARATION_CANT_BE_EMPTY"/>
+      <xs:enumeration value="SNT_PRODUCT_NUMBER_IN_DECLARATION_MUST_BE_EMPTY"/>
+      <xs:enumeration value="SNT_PRODUCT_DECLARATION_NUMBER_CANT_BE_EMPTY"/>
+      <xs:enumeration value="SNT_PRODUCT_DECLARATION_NUMBER_MUST_BE_EMPTY"/>
+      <xs:enumeration value="SNT_PRODUCT_TRU_ORIGIN_CODE_WRONG"/>
+      <xs:enumeration value="SNT_FIXED_CREATED"/>
+      <xs:enumeration value="SNT_INVALID_PRODUCT_SET"/>
+      <xs:enumeration value="SNT_INVALID_PRODUCT_COUNT"/>
+      <xs:enumeration value="SNT_KOGD_NOT_FOUND"/>
+      <xs:enumeration value="SNT_KOGD_NOT_NULL"/>
+      <xs:enumeration value="SNT_SENDER_KOGD_NOT_EQUALS_OVD"/>
+      <xs:enumeration value="SNT_RECIPIENT_KOGD_NOT_EQUALS_OVD"/>
+      <xs:enumeration value="SNT_PACKAGE_TYPE_NOT_FOUND"/>
+      <xs:enumeration value="SNT_MARKING_CODE_CANT_BE_EMPTY"/>
+      <xs:enumeration value="SNT_DIGITAL_MARK_COMPATIBILITY_ERROR"/>
+      <xs:enumeration value="SNT_PERMISSIVE_DOCUMENT_NUMBER_CANT_BE_EMPTY"/>
+      <xs:enumeration value="SNT_PERMISSIVE_DOCUMENT_NOT_FOUND"/>
+      <xs:enumeration value="SNT_PERMISSIVE_DOCUMENT_WRONG_STATUS"/>
+      <xs:enumeration value="SNT_PERMISSIVE_DOCUMENT_TNVED_NOT_EXPORT_CONTROL"/>
+      <xs:enumeration value="SNT_PERMISSIVE_DOCUMENT_SNT_NOT_EXPORT_IMPORT"/>
+      <xs:enumeration value="SNT_PERMISSIVE_DOCUMENT_TYPE_WRONG"/>
+      <xs:enumeration value="SNT_PERMISSIVE_DOCUMENT_SNT_DATA_WRONG"/>
+      <xs:enumeration value="SNT_PERMISSIVE_DOCUMENT_SNT_DATE_WRONG"/>
+      <xs:enumeration value="SNT_PERMISSIVE_DOCUMENT_REMAINDER_QUANTYTY_DEFICIENCY"/>
+      <xs:enumeration value="SNT_PERMISSIVE_DOCUMENT_HAS_LINK"/>
+      <xs:enumeration value="SNT_PERMISSIVE_DOCUMENT_DUPLICATE"/>
+      <xs:enumeration value="SNT_ALCOHOL_EXCEPT_BEER_PRODUCT_TARE_CAPACITY_INCORRECT"/>
+      <xs:enumeration value="SNT_ALCOHOL_EXCEPT_BEER_PRODUCT_PRODUCTION_TYPE_INCORRECT"/>
+      <xs:enumeration value="SNT_TOBACCO_PRODUCT_KOGD_OF_SENDER_NOT_NULL"/>
+      <xs:enumeration value="SNT_TOBACCO_PRODUCT_KOGD_OF_SENDER_NOT_FOUND"/>
+      <xs:enumeration value="SNT_TOBACCO_PRODUCT_KOGD_OF_RECIPIENT_NOT_FOUND"/>
+      <xs:enumeration value="SNT_PRODUCT_KOGD_OF_RECIPIENT_NOT_EQUALS_OVD"/>
+      <xs:enumeration value="SNT_PRODUCT_KOGD_OF_SENDER_NOT_EQUALS_OVD"/>
+      <xs:enumeration value="SNT_PAWNEE_CUSTODIAN_PRODUCT_GOLDEN_TYPE_REQUIRED"/>
+      <xs:enumeration value="SNT_PAWNEE_CUSTODIAN_SELLER_BUSINESS_PROFILE_TYPE_REQUIRED"/>
+      <xs:enumeration value="SNT_OGD_MARKS_NOT_NULL"/>
+      <xs:enumeration value="SNT_OGD_MARKS_DRIVER_IIN_NOT_FOUND"/>
+      <xs:enumeration value="TAXPAYER_STORE_IS_DEFAULT"/>
+      <xs:enumeration value="TAXPAYER_STORE_HAS_REMAINS"/>
+      <xs:enumeration value="TAXPAYER_STORE_HAS_DEFAULT"/>
+      <xs:enumeration value="TAXPAYER_STORE_UNNABLE_TO_CHANGE_STATUS"/>
+      <xs:enumeration value="TAXPAYER_STORE_SYSTEM_CHANGE_STATUS_PROHIBITED"/>
+      <xs:enumeration value="TAXPAYER_STORE_STATUS_INVALID"/>
+      <xs:enumeration value="TAXPAYER_STORE_USER_NOT_FOUND"/>
+      <xs:enumeration value="TAXPAYER_STORE_RESPONSIBLE_PERSON_IIN_NOT_FOUND"/>
+      <xs:enumeration value="TAXPAYER_STORE_RESPONSIBLE_PERSON_DO_NOT_HAVE_PERMISSION"/>
+      <xs:enumeration value="TAXPAYER_STORE_TIN_TRUSTER_CANNOT_CREATE_STORE"/>
+      <xs:enumeration value="TAXPAYER_STORE_IS_SYSTEM_PROHIBIT_TO_MOVE_GOODS"/>
+      <xs:enumeration value="TAXPAYER_STORE_PUBLIC_STORE_REQUEIRED"/>
+      <xs:enumeration value="TAXPAYER_STORE_PUBLIC_STORE_ONLY_ONE_ALLOWED"/>
+      <xs:enumeration value="SEZ_CODE_NOT_FOUND"/>
+      <xs:enumeration value="SEZ_CODE_IS_NOT_ACTIVE"/>
+      <xs:enumeration value="WRONG_XML_FORMAT"/>
+      <xs:enumeration value="SESSION_CLOSED"/>
+      <xs:enumeration value="DUPLICATE_DATA"/>
+      <xs:enumeration value="WRONG_OPERATION"/>
+      <xs:enumeration value="DUPLICATE_MESSAGE"/>
+      <xs:enumeration value="DOCUMENT_NOT_FOUND"/>
+      <xs:enumeration value="ACCESS_DENIED"/>
+      <xs:enumeration value="INTERNAL_ERROR"/>
+      <xs:enumeration value="WRONG_MESSAGE_TYPE"/>
+      <xs:enumeration value="WRONG_MESSAGE_CLAZZ"/>
+      <xs:enumeration value="KS_VERIFICATION_NDS_SUM_DIFFERS"/>
+      <xs:enumeration value="KS_VERIFICATION_INVOICE_NOT_FOUND"/>
+      <xs:enumeration value="KS_VERIFICATION_INCORRECT_STATUSES"/>
+      <xs:enumeration value="OFD_UPDATE_LIMITS_EXCEED_LIMITS"/>
+      <xs:enumeration value="OFD_LAST_EVENT_DATE_EXCEEDS_LIMITS"/>
+      <xs:enumeration value="EXCISABLE_GOODS_MOVEMENT_PROHIBITED"/>
+      <xs:enumeration value="MESSAGE_VALIDATION_ERROR"/>
+      <xs:enumeration value="MPT_FIELD_PROHIBITED"/>
+      <xs:enumeration value="ESS_CERTIFICATE_TIN_NOT_EQUALS_TO_OWNER"/>
+      <xs:enumeration value="ESS_CERTIFICATE_CANCELED"/>
+      <xs:enumeration value="ESS_CERTIFICATE_EXPIRED"/>
+      <xs:enumeration value="ESS_CERTIFICATE_NOT_EQUALS_TO_TNVED"/>
+      <xs:enumeration value="ESS_CERTIFICATE_NOT_EQUALS_TO_PRODUCT_NAME"/>
+      <xs:enumeration value="ESS_CERTIFICATE_NOT_EQUALS_TO_MEASURE_UNIT"/>
+      <xs:enumeration value="ESS_CERTIFICATE_NOT_EQUALS_TO_DESTINATION_COUNTRY"/>
+      <xs:enumeration value="ESS_CERTIFICATE_QUOTA_LIMIT_ERROR"/>
+      <xs:enumeration value="ASSURANCE_PASSPORT_NOT_FOUND"/>
+      <xs:enumeration value="KKM_FISKAL_NUMBER_DUPPLICATE"/>
+      <xs:enumeration value="KKM_WRONG_ACTION"/>
+      <xs:enumeration value="FILE_NOT_FOUND"/>
+      <xs:enumeration value="STATIC_REPORT_KOGD_IS_NULL"/>
+      <xs:enumeration value="STATIC_REPORT_DATE_FROM_MUST_BE_NULL"/>
+      <xs:enumeration value="STATIC_REPORT_DATE_FROM_REQUIRED"/>
+      <xs:enumeration value="STATIC_REPORT_DATE_TO_REQUIRED"/>
+      <xs:enumeration value="STATIC_REPORT_DATE_FROM_IS_GRATER_THAN_DATE_TO"/>
+      <xs:enumeration value="STATIC_REPORT_DATE_TO_TOO_LARGE"/>
+      <xs:enumeration value="STATIC_REPORT_KOGD_NOT_FOUND"/>
+      <xs:enumeration value="TNVED_NOT_CORRESPOND_TO_PRODUCT_ID"/>
+      <xs:enumeration value="LOCK_ACKQUIRING_TIME_EXCEEDED"/>
+      <xs:enumeration value="UNKNOWN_VALUE"/>
+      <xs:enumeration value="TAXPAYER_NOT_FOUND"/>
+      <xs:enumeration value="WRONG_FORMAT"/>
+      <xs:enumeration value="VALUES_DIFFERS"/>
+      <xs:enumeration value="MATCHING_ZVT_DONE"/>
+      <xs:enumeration value="NO_TNVED_PROCESSABLE_PRODUCTS"/>
+      <xs:enumeration value="PROCESSING_ERROR"/>
+      <xs:enumeration value="USER_VSTORE_SNT_SETTINGS_REQUEIRED"/>
+      <xs:enumeration value="USER_VSTORE_DT_ZVT_SETTINGS_REQUEIRED"/>
+      <xs:enumeration value="UNABLE_TO_DELETE_DOCUMENT_WITH_REG_NUM"/>
+      <xs:enumeration value="LOCKED_GOODS_MOVEMENT_PROHIBITED"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="versionResponse" nillable="true" type="tns:versionResponse"/>
+  <xs:element name="esfVersionRequest" nillable="true" type="tns:versionRequest"/>
+  <xs:element name="esfVersionResponse" nillable="true" type="tns:versionResponse"/>
+  <xs:element name="apiVersionRequest" nillable="true" type="tns:versionRequest"/>
+  <xs:element name="apiVersionResponse" nillable="true" type="tns:versionResponse"/>
+  <xs:element name="errorCodesRequest" nillable="true" type="tns:errorCodesRequest"/>
+  <xs:element name="errorCodesResponse" nillable="true" type="tns:errorCodesResponse"/>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getVersionResponse">
+    <wsdl:part element="tns:versionResponse" name="versionResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getEsfVersion">
+    <wsdl:part element="tns:esfVersionRequest" name="esfVersionRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getApiVersion">
+    <wsdl:part element="tns:apiVersionRequest" name="apiVersionRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getErrorCodes">
+    <wsdl:part element="tns:errorCodesRequest" name="errorCodesRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getErrorCodesResponse">
+    <wsdl:part element="tns:errorCodesResponse" name="errorCodesResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getVersion">
+  </wsdl:message>
+  <wsdl:message name="getEsfVersionResponse">
+    <wsdl:part element="tns:esfVersionResponse" name="esfVersionResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getApiVersionResponse">
+    <wsdl:part element="tns:apiVersionResponse" name="apiVersionResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="VersionService">
+<wsdl:documentation>Сервис получения сведений о приложении</wsdl:documentation>
+    <wsdl:operation name="getVersion">
+<wsdl:documentation>Возвращает информацию о текущей версии приложения (Тест, Прод)</wsdl:documentation>
+      <wsdl:input message="tns:getVersion" name="getVersion">
+    </wsdl:input>
+      <wsdl:output message="tns:getVersionResponse" name="getVersionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getEsfVersion">
+<wsdl:documentation>Возвращает информацию об актуальной версии бланка ЭСФ</wsdl:documentation>
+      <wsdl:input message="tns:getEsfVersion" name="getEsfVersion">
+    </wsdl:input>
+      <wsdl:output message="tns:getEsfVersionResponse" name="getEsfVersionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getApiVersion">
+<wsdl:documentation>Возвращает информацию о последней версии API (веб сервисах)</wsdl:documentation>
+      <wsdl:input message="tns:getApiVersion" name="getApiVersion">
+    </wsdl:input>
+      <wsdl:output message="tns:getApiVersionResponse" name="getApiVersionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getErrorCodes">
+<wsdl:documentation>Возвращает информацию о кодах ошибок и их описания</wsdl:documentation>
+      <wsdl:input message="tns:getErrorCodes" name="getErrorCodes">
+    </wsdl:input>
+      <wsdl:output message="tns:getErrorCodesResponse" name="getErrorCodesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="VersionServiceSoapBinding" type="tns:VersionService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getVersion">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getVersion">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getVersionResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getEsfVersion">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getEsfVersion">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getEsfVersionResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getApiVersion">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getApiVersion">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getApiVersionResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getErrorCodes">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getErrorCodes">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getErrorCodesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="VersionService">
+    <wsdl:port binding="tns:VersionServiceSoapBinding" name="VersionServicePort">
+      <soap:address location="https://test2.esf.kgd.gov.kz:8443/esf-web/ws/api1/VersionService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
